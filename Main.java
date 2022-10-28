@@ -11,46 +11,59 @@ public class Main {
     public static void main(String[] args) {
 
         Scanner input = new Scanner(System.in);
-        System.out.println("Enter the first Roman number: ");
-        String str = input.next();
-        int result1 = convertRomanToInteger(str);
-        System.out.println(result1);
+        int answer = 0;
+        Boolean lastInputIsOperation = true;
+        String lasOperationInput = "";
+        while (true) {
+            String operation = "";
+                if (lastInputIsOperation) {
+                    System.out.print("Enter the symbol: ");
+                    String str1 = input.next();
 
-        System.out.println("Enter the second Roman number: ");
-        String str2 = input.next();
-        int result2 = convertRomanToInteger(str2);
-        System.out.println(result2);
+                    if (str1.equals("IIII") || str1.equals("VIIII") || str1.equals("XXXX") || str1.equals("LXXXX")) {
+                        System.out.println("Invalid symbol");
+                        continue;
+                    }
 
-        Scanner op = new Scanner(System.in);
-        System.out.println("Enter the operation: ");
-        String operation = op.next();
+                    int number = convertRomanToInteger(str1);
 
-        if(operation.equals("+"))
-        {
-            int sum = result1 + result2;
-            String result = convertIntegerToRoman(sum);
-            System.out.println("your answer is: " + result);
-        }
-        if(operation.equals("-"))
-        {
-            int sum = result1 - result2;
-            String result = convertIntegerToRoman(sum);
-            System.out.println("your answer is: " + result);
-        }
-        if(operation.equals("/"))
-        {
-            int sum = result1 / result2;
-            String result = convertIntegerToRoman(sum);
-            System.out.println("your answer is: " + result);
-        }
-        if(operation.equals("*"))
-        {
-            int sum = result1 * result2;
-            String result = convertIntegerToRoman(sum);
-            System.out.println("your answer is: " + result);
-        }
+                    if (answer == 0) {
+                        answer += number;
+                    } else {
+                        if (lasOperationInput.equals("+")) {
+                            answer += number;
+                        }
+                        if (lasOperationInput.equals("-")) {
+                            answer -= number;
+                        }
+                        if (lasOperationInput.equals("*")) {
+                            answer *= number;
+                        }
+                        if (lasOperationInput.equals("/")) {
+                            answer = answer / number;
+                        }
+                    }
 
+                    lastInputIsOperation = false;
+
+                    System.out.println();
+                } else {
+                    System.out.print("Enter the operation: ");
+                    operation = input.next().trim();
+                    System.out.println();
+                    lasOperationInput = operation;
+                    lastInputIsOperation = true;
+                    if (operation.equals("exit")) {
+                        String ans = convertIntegerToRoman(answer);
+                        System.out.println(ans);
+                        break;
+                    }
+                }
+
+
+        }
     }
+}
 
 
-    }
+
