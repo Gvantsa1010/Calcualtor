@@ -17,7 +17,7 @@ public class Main {
         while (true) {
             String operation = "";
                 if (lastInputIsOperation) {
-                    System.out.print("Enter the symbol: ");
+                    System.out.print("Enter the roman number: ");
                     String str1 = input.next();
 
                     if (str1.equals("IIII") || str1.equals("VIIII") || str1.equals("XXXX") || str1.equals("LXXXX")) {
@@ -26,6 +26,10 @@ public class Main {
                     }
 
                     int number = convertRomanToInteger(str1);
+                    if(number==-1){
+                        System.out.println("Invalid symbol");
+                        continue;
+                    }
 
                     if (answer == 0) {
                         answer += number;
@@ -42,6 +46,7 @@ public class Main {
                         if (lasOperationInput.equals("/")) {
                             answer = answer / number;
                         }
+
                     }
 
                     lastInputIsOperation = false;
@@ -52,6 +57,10 @@ public class Main {
                     operation = input.next().trim();
                     System.out.println();
                     lasOperationInput = operation;
+                    if (!lasOperationInput.equals("+") && !lasOperationInput.equals("exit")&&!lasOperationInput.equals("-")&&!lasOperationInput.equals("*")&&!lasOperationInput.equals("/")) {
+                        System.out.println("bad operation");
+                        continue;
+                    }
                     lastInputIsOperation = true;
                     if (operation.equals("exit")) {
                         String ans = convertIntegerToRoman(answer);

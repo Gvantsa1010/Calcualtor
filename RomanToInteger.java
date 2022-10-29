@@ -17,14 +17,24 @@ public class RomanToInteger {
             charMap.put('C', 100);
 
             int result = 0;
-            for(int i=0; i < str.length()-1; i++){
-                if(charMap.get(str.charAt(i)) >= charMap.get(str.charAt(i+1))){
-                    result = result + charMap.get(str.charAt(i));
-                }else{
-                    result = result - charMap.get(str.charAt(i));
+            for(int i=0; i < str.length(); i++){
+                if(charMap.get(str.charAt(i))!=null) {
+                    if (i != str.length() - 1)
+                    {
+                        if (charMap.get(str.charAt(i)) >= charMap.get(str.charAt(i + 1))) {
+                            result = result + charMap.get(str.charAt(i));
+                        } else {
+                            result = result - charMap.get(str.charAt(i));
+                        }
+                   }
+                    else
+                    {
+                        result = result + charMap.get(str.charAt(i));
+                    }
+                }else {
+                    return -1;
                 }
             }
-            result = result + charMap.get(str.charAt(str.length()-1));
             return result;
 
         }
